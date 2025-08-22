@@ -20,15 +20,16 @@ app.get("/health", (_req, res) => {
   res.status(200).json({ status: "ok", uptime: process.uptime(), timestamp: Date.now() });
 });
 
-app.post("/api/apple/callback", (req, res) => {
+app.post("/api/callback", (req, res) => {
   const code = req.body?.code;
   const idToken = req.body?.id_token;
+  const state = req.body?.state
 
-  if (!code || !idToken) {
+  if (!code || !idToken || !state) {
     return res.status(400).json({ error: "Missing code or id_token" });
   }
 
-  return res.redirect(`app.apple.auth://auth?code=${code}&idToken=${idToken}`);
+  return res.redirect(`${state}://auth?code=${code}&idToken=${idToken}&state=${state}`);
 });
 
 app.use((_req, res) => {
