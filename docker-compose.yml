@@ -1,0 +1,10 @@
+version: "2.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "5202:5202"
+    environment:
+      - NODE_ENV=production
+    restart: always

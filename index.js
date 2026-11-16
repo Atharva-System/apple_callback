@@ -27,7 +27,6 @@ app.post("/api/apple/callback", (req, res) => {
   if (!code || !idToken) {
     return res.status(400).json({ error: "Missing code or id_token" });
   }
-
   return res.redirect(`app.apple.auth://auth?code=${code}&idToken=${idToken}`);
 });
 
